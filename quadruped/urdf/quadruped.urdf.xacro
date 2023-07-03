@@ -1,0 +1,1007 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="quadruped" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="ros2_control.xacro"/>
+
+  <link name="world"></link>
+
+  <!-- ******************************  MainBody  ****************************** -->
+  <link name="MainBody">
+    <inertial>
+      <origin
+        xyz="0.0699847914844596 -0.00356357206679569 0.0384781103388268"
+        rpy="0 0 0" />
+      <mass
+        value="2.19167044853653" />
+      <inertia
+        ixx="0.005553479301618"
+        ixy="-6.540085990001E-06"
+        ixz="7.50530470509038E-07"
+        iyy="0.00427828043368081"
+        iyz="-5.53252407160373E-06"
+        izz="0.00867140989666068" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/MainBody.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.3 0.3 0.3 0.5" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/MainBody.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="MainBodyJoint" type="fixed">
+    <origin
+      xyz="0 0 0.5"
+      rpy="0 0 0" />
+    <parent
+      link="world" />
+    <child
+      link="MainBody" />
+  </joint>
+
+
+  <!-- ******************************  FL_HipLink  ****************************** -->
+  <link name="FL_HipLink">
+    <inertial>
+      <origin
+        xyz="-0.0474383151933495 -0.0147762956502852 -0.000133539761215884"
+        rpy="0 0 0" />
+      <mass
+        value="0.0912610289974214" />
+      <inertia
+        ixx="2.62643461992781E-05"
+        ixy="6.64542513446049E-07"
+        ixz="2.08491311297733E-09"
+        iyy="4.14660535595442E-05"
+        iyz="-1.29024359886147E-07"
+        izz="2.91589180391666E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/FL_HipLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.3 0.3 0.3 0.5" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/FL_HipLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="FL_HipJoint" type="revolute">
+    <origin
+      xyz="0.2808 0.1 0.037"
+      rpy="0 0 0" />
+    <parent
+      link="MainBody" />
+    <child
+      link="FL_HipLink" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.175"
+      upper="1.571"
+      effort="0"
+      velocity="0" />
+    <dynamics damping="0.7" />
+  </joint>
+
+
+  <!-- ******************************  FL_FemurLink  ****************************** -->
+  <link name="FL_FemurLink">
+    <inertial>
+      <origin
+        xyz="-0.019067661192873 0.0482776334868805 -0.0179044704692111"
+        rpy="0 0 0" />
+      <mass
+        value="0.16400629425815" />
+      <inertia
+        ixx="0.000129344985699891"
+        ixy="-2.90363645954103E-06"
+        ixz="-8.0603844096841E-05"
+        iyy="0.000234982427796547"
+        iyz="-2.84523643101322E-06"
+        izz="0.000125756506493398" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/FL_FemurLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.3 0.3 0.3 0.5" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/FL_FemurLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="FL_FemurJoint" type="revolute">
+    <origin
+      xyz="-0.054 -0.009 0"
+      rpy="0 0 0" />
+    <parent
+      link="FL_HipLink" />
+    <child
+      link="FL_FemurLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.785"
+      upper="0.785"
+      effort="0"
+      velocity="0" />
+    <dynamics damping="0.7" />
+  </joint>
+
+
+  <!-- ******************************  FL_TibiaLink  ****************************** -->
+  <link name="FL_TibiaLink">
+    <inertial>
+      <origin
+        xyz="0.0322017175929264 2.39643160090258E-05 -0.0962232443701883"
+        rpy="0 0 0" />
+      <mass
+        value="0.109672208230116" />
+      <inertia
+        ixx="0.000411262084214036"
+        ixy="-9.23674401608681E-07"
+        ixz="0.000137528054915291"
+        iyy="0.000471917665955004"
+        iyz="2.15761541594468E-06"
+        izz="6.64698615962603E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/FL_TibiaLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.3 0.3 0.3 0.5" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/FL_TibiaLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="FL_TibiaJoint"
+    type="revolute">
+    <origin
+      xyz="-0.1283 0.0745 -0.1404"
+      rpy="0 0 0" />
+    <parent
+      link="FL_FemurLink" />
+    <child
+      link="FL_TibiaLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.571"
+      upper="0"
+      effort="0"
+      velocity="0" />
+    <dynamics damping="0.7" />
+  </joint>
+
+
+  <!-- ******************************  FL_FootLink  ****************************** -->
+  <link name="FL_FootLink">
+    <inertial>
+      <origin
+        xyz="0.000340694607176201 1.29750897526204E-10 0.00531238344111944"
+        rpy="0 0 0" />
+      <mass
+        value="0.0026171008368923" />
+      <inertia
+        ixx="1.42176481764719E-07"
+        ixy="5.41889139229988E-14"
+        ixz="2.0650421997253E-08"
+        iyy="3.94491238638286E-07"
+        iyz="-1.26336440804866E-14"
+        izz="4.62835009996326E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/FL_FootLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/FL_FootLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="FL_FootJoint"
+    type="fixed">
+    <origin
+      xyz="0.063753 0 -0.2336"
+      rpy="0 0 0" />
+    <parent
+      link="FL_TibiaLink" />
+    <child
+      link="FL_FootLink" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+
+  <!-- ******************************  FR_HipLink  ****************************** -->
+  <link name="FR_HipLink">
+    <inertial>
+      <origin
+        xyz="-0.0474384514030271 0.0147763300480575 -0.000133542163833156"
+        rpy="0 0 0" />
+      <mass
+        value="0.0912604374264468" />
+      <inertia
+        ixx="2.62642303167425E-05"
+        ixy="-6.64485390732827E-07"
+        ixz="2.08557755571092E-09"
+        iyy="4.14659005585127E-05"
+        iyz="1.29025236281121E-07"
+        izz="2.91587855341185E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/FR_HipLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.3 0.3 0.3 0.5" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/FR_HipLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="FR_HipJoint"
+    type="revolute">
+    <origin
+      xyz="0.2808 -0.1 0.037"
+      rpy="0 0 0" />
+    <parent
+      link="MainBody" />
+    <child
+      link="FR_HipLink" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.571"
+      upper="0.175"
+      effort="0"
+      velocity="0" />
+    <dynamics damping="0.7" />
+  </joint>
+
+
+  <!-- ******************************  FR_FemurLink  ****************************** -->
+  <link name="FR_FemurLink">
+    <inertial>
+      <origin
+        xyz="-0.0190676655356846 -0.0466135123749134 -0.0179044738259941"
+        rpy="0 0 0" />
+      <mass
+        value="0.164006273287783" />
+      <inertia
+        ixx="0.00012934517628055"
+        ixy="2.9036208549203E-06"
+        ixz="-8.06040324775779E-05"
+        iyy="0.000234982745310931"
+        iyz="2.84520964677916E-06"
+        izz="0.000125756633657412" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/FR_FemurLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.3 0.3 0.3 0.5" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/FR_FemurLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="FR_FemurJoint"
+    type="revolute">
+    <origin
+      xyz="-0.054 0.009 0"
+      rpy="0 0 0" />
+    <parent
+      link="FR_HipLink" />
+    <child
+      link="FR_FemurLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.785"
+      upper="0.785"
+      effort="0"
+      velocity="0" />
+    <dynamics damping="0.7" />
+  </joint>
+
+
+  <!-- ******************************  FR_TibiaLink  ****************************** -->
+  <link name="FR_TibiaLink">
+    <inertial>
+      <origin
+        xyz="0.032201696266614 -2.39145069415025E-05 -0.0962231575946988"
+        rpy="0 0 0" />
+      <mass
+        value="0.109672400053178" />
+      <inertia
+        ixx="0.000411263099234663"
+        ixy="9.23702371695808E-07"
+        ixz="0.000137528330485256"
+        iyy="0.000471918768708998"
+        iyz="-2.15772655059977E-06"
+        izz="6.64699651574826E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/FR_TibiaLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.3 0.3 0.3 0.5" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/FR_TibiaLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="FR_TibiaJoint"
+    type="revolute">
+    <origin
+      xyz="-0.1283 -0.0745 -0.1404"
+      rpy="0 0 0" />
+    <parent
+      link="FR_FemurLink" />
+    <child
+      link="FR_TibiaLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.571"
+      upper="0"
+      effort="0"
+      velocity="0" />
+    <dynamics damping="0.7" />
+  </joint>
+
+
+  <!-- ******************************  FR_FootLink  ****************************** -->
+  <link name="FR_FootLink">
+    <inertial>
+      <origin
+        xyz="0.000340717980085559 -7.92920729075774E-11 0.00531238163967823"
+        rpy="0 0 0" />
+      <mass
+        value="0.00261710077329796" />
+      <inertia
+        ixx="1.42176397424818E-07"
+        ixy="5.55077570146718E-14"
+        ixz="2.06498502048881E-08"
+        iyy="3.94491214620165E-07"
+        iyz="4.55187267688304E-15"
+        izz="4.62835064651917E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/FR_FootLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/FR_FootLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="FR_FootJoint"
+    type="fixed">
+    <origin
+      xyz="0.063753 0 -0.2336"
+      rpy="0 0 0" />
+    <parent
+      link="FR_TibiaLink" />
+    <child
+      link="FR_FootLink" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+
+  <!-- ******************************  RL_HipLink  ****************************** -->
+  <link name="RL_HipLink">
+    <inertial>
+      <origin
+        xyz="-0.047438452373836 -0.0147763312239577 -0.00013354062146792"
+        rpy="0 0 0" />
+      <mass
+        value="0.0912604411052719" />
+      <inertia
+        ixx="2.62642330393833E-05"
+        ixy="6.6448509889878E-07"
+        ixz="2.08491461643559E-09"
+        iyy="4.14659029589153E-05"
+        iyz="-1.29024361174821E-07"
+        izz="2.9158785320734E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/RL_HipLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.3 0.3 0.3 0.5" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/RL_HipLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RL_HipJoint"
+    type="revolute">
+    <origin
+      xyz="-0.1864 0.1 0.037"
+      rpy="0 0 0" />
+    <parent
+      link="MainBody" />
+    <child
+      link="RL_HipLink" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.175"
+      upper="1.571"
+      effort="0"
+      velocity="0" />
+    <dynamics damping="0.7" />
+  </joint>
+
+
+  <!-- ******************************  RL_FemurLink  ****************************** -->
+  <link name="RL_FemurLink">
+    <inertial>
+      <origin
+        xyz="-0.0190676612201011 0.0482776333402242 -0.0179044703898302"
+        rpy="0 0 0" />
+      <mass
+        value="0.164006293646539" />
+      <inertia
+        ixx="0.000129344985575664"
+        ixy="-2.90363647177888E-06"
+        ixz="-8.06038437038234E-05"
+        iyy="0.000234982426414766"
+        iyz="-2.84523643331501E-06"
+        izz="0.000125756505235998" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/RL_FemurLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.3 0.3 0.3 0.5" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/RL_FemurLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RL_FemurJoint"
+    type="revolute">
+    <origin
+      xyz="-0.0539999999999997 -0.00900000000000012 0"
+      rpy="0 0 0" />
+    <parent
+      link="RL_HipLink" />
+    <child
+      link="RL_FemurLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.785"
+      upper="0.785"
+      effort="0"
+      velocity="0" />
+    <dynamics damping="0.7" />
+  </joint>
+
+
+  <!-- ******************************  RL_TibiaLink  ****************************** -->
+  <link name="RL_TibiaLink">
+    <inertial>
+      <origin
+        xyz="0.0322017175929267 2.39643160090605E-05 -0.0962232443701882"
+        rpy="0 0 0" />
+      <mass
+        value="0.109672208230115" />
+      <inertia
+        ixx="0.000411262084214035"
+        ixy="-9.23674401608713E-07"
+        ixz="0.000137528054915292"
+        iyy="0.000471917665955"
+        iyz="2.15761541594472E-06"
+        izz="6.64698615962576E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/RL_TibiaLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.3 0.3 0.3 0.5" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/RL_TibiaLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RL_TibiaJoint"
+    type="revolute">
+    <origin
+      xyz="-0.128298296280577 0.0745 -0.140402280570314"
+      rpy="0 0 0" />
+    <parent
+      link="RL_FemurLink" />
+    <child
+      link="RL_TibiaLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.571"
+      upper="0"
+      effort="0"
+      velocity="0" />
+    <dynamics damping="0.7" />
+  </joint>
+
+
+  <!-- ******************************  RL_FootLink  ****************************** -->
+  <link name="RL_FootLink">
+    <inertial>
+      <origin
+        xyz="0.000340694607175895 1.29750959976249E-10 0.00531238344111933"
+        rpy="0 0 0" />
+      <mass
+        value="0.00261710083689229" />
+      <inertia
+        ixx="1.42176481764717E-07"
+        ixy="5.41889127288802E-14"
+        ixz="2.06504219972552E-08"
+        iyy="3.94491238638283E-07"
+        iyz="-1.26336450002804E-14"
+        izz="4.62835009996322E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/RL_FootLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/RL_FootLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RL_FootJoint"
+    type="fixed">
+    <origin
+      xyz="0.0637534602692007 0 -0.233603271727562"
+      rpy="0 0 0" />
+    <parent
+      link="RL_TibiaLink" />
+    <child
+      link="RL_FootLink" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+
+  <!-- ******************************  RR_HipLink  ****************************** -->
+  <link name="RR_HipLink">
+    <inertial>
+      <origin
+        xyz="-0.0474383828125632 0.0147763122611671 -0.000133507988380466"
+        rpy="0 0 0" />
+      <mass
+        value="0.091260731372522" />
+      <inertia
+        ixx="2.62642868979782E-05"
+        ixy="-6.64514098666864E-07"
+        ixz="2.04904716488888E-09"
+        iyy="4.14659758603212E-05"
+        iyz="1.28997305406123E-07"
+        izz="2.91588518946717E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/RR_HipLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.3 0.3 0.3 0.5" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/RR_HipLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RR_HipJoint"
+    type="revolute">
+    <origin
+      xyz="-0.1864 -0.1 0.037"
+      rpy="0 0 0" />
+    <parent
+      link="MainBody" />
+    <child
+      link="RR_HipLink" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.571"
+      upper="0.175"
+      effort="0"
+      velocity="0" />
+    <dynamics damping="0.7" />
+  </joint>
+
+
+  <!-- ******************************  RR_FemurLink  ****************************** -->
+  <link name="RR_FemurLink">
+    <inertial>
+      <origin
+        xyz="-0.0190676655356846 -0.0466135123749133 -0.0179044738259942"
+        rpy="0 0 0" />
+      <mass
+        value="0.164006273287783" />
+      <inertia
+        ixx="0.000129345176280543"
+        ixy="2.90362085491998E-06"
+        ixz="-8.06040324775837E-05"
+        iyy="0.000234982745310922"
+        iyz="2.84520964677911E-06"
+        izz="0.000125756633657409" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/RR_FemurLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.3 0.3 0.3 0.5" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/RR_FemurLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RR_FemurJoint"
+    type="revolute">
+    <origin
+      xyz="-0.0539999999999997 0.00900000000000001 0"
+      rpy="0 0 0" />
+    <parent
+      link="RR_HipLink" />
+    <child
+      link="RR_FemurLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.785"
+      upper="0.785"
+      effort="0"
+      velocity="0" />
+    <dynamics damping="0.7" />
+  </joint>
+
+
+  <!-- ******************************  RR_TibiaLink  ****************************** -->
+  <link name="RR_TibiaLink">
+    <inertial>
+      <origin
+        xyz="0.0322016962666145 -2.39145069416136E-05 -0.0962231575946956"
+        rpy="0 0 0" />
+      <mass
+        value="0.109672400053178" />
+      <inertia
+        ixx="0.000411263099234663"
+        ixy="9.23702371695801E-07"
+        ixz="0.000137528330485257"
+        iyy="0.000471918768708998"
+        iyz="-2.15772655059978E-06"
+        izz="6.64699651574822E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/RR_TibiaLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.3 0.3 0.3 0.5" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/RR_TibiaLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RR_TibiaJoint"
+    type="revolute">
+    <origin
+      xyz="-0.128298296280577 -0.0745000000000001 -0.140402280570314"
+      rpy="0 0 0" />
+    <parent
+      link="RR_FemurLink" />
+    <child
+      link="RR_TibiaLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.571"
+      upper="0"
+      effort="0"
+      velocity="0" />
+    <dynamics damping="0.7" />
+  </joint>
+
+
+  <!-- ******************************  RR_FootLink  ****************************** -->
+  <link name="RR_FootLink">
+    <inertial>
+      <origin
+        xyz="0.00034071798008628 -7.92921284187287E-11 0.00531238163968074"
+        rpy="0 0 0" />
+      <mass
+        value="0.00261710077329803" />
+      <inertia
+        ixx="1.42176397424824E-07"
+        ixy="5.5507757782185E-14"
+        ixz="2.06498502048821E-08"
+        iyy="3.94491214620184E-07"
+        iyz="4.55187376116775E-15"
+        izz="4.62835064651936E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/RR_FootLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped/meshes/collisions/RR_FootLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RR_FootJoint"
+    type="fixed">
+    <origin
+      xyz="0.0637534602692004 0 -0.233603271727562"
+      rpy="0 0 0" />
+    <parent
+      link="RR_TibiaLink" />
+    <child
+      link="RR_FootLink" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>

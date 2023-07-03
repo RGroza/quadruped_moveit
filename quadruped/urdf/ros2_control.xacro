@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
+    <ros2_control name="GazeboSystem" type="system">
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+
+    <joint name="FL_HipJoint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="min">-0.175</param>
+        <param name="max">1.571</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name='effort'/>
+    </joint>
+    <joint name="FL_FemurJoint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="min">-0.785</param>
+        <param name="max">0.785</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name='effort'/>
+    </joint>
+    <joint name="FL_TibiaJoint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="min">-1.571</param>
+        <param name="max">0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name='effort'/>
+    </joint>
+
+    <joint name="FR_HipJoint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="min">-1.571</param>
+        <param name="max">0.175</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name='effort'/>
+    </joint>
+    <joint name="FR_FemurJoint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="min">-0.785</param>
+        <param name="max">0.785</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name='effort'/>
+    </joint>
+    <joint name="FR_TibiaJoint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="min">-1.571</param>
+        <param name="max">0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name='effort'/>
+    </joint>
+
+    <joint name="RL_HipJoint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="min">-0.175</param>
+        <param name="max">1.571</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name='effort'/>
+    </joint>
+    <joint name="RL_FemurJoint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="min">-0.785</param>
+        <param name="max">0.785</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name='effort'/>
+    </joint>
+    <joint name="RL_TibiaJoint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="min">-1.571</param>
+        <param name="max">0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name='effort'/>
+    </joint>
+
+    <joint name="RR_HipJoint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="min">-1.571</param>
+        <param name="max">0.175</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name='effort'/>
+    </joint>
+    <joint name="RR_FemurJoint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="min">-0.785</param>
+        <param name="max">0.785</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name='effort'/>
+    </joint>
+    <joint name="RR_TibiaJoint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="min">-1.571</param>
+        <param name="max">0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name='effort'/>
+    </joint>
+  </ros2_control>
+
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <parameters>$(find quadruped)/config/quadruped_controllers.yaml</parameters>
+    </plugin>
+  </gazebo>
+</robot>

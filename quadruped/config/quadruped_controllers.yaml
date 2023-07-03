@@ -1,0 +1,108 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 30
+    use_sim_time: true
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    # forward_position_controller:
+    #   type: forward_command_controller/ForwardCommandController
+
+    robot_controller:
+      # type: joint_trajectory_controller/JointTrajectoryController
+      type: position_controllers/JointGroupPositionController
+
+
+# forward_position_controller:
+#   ros__parameters:
+#     joints:
+#       - FL_HipJoint
+#       - FL_FemurJoint
+#       - FL_TibiaJoint
+#       - FR_HipJoint
+#       - FR_FemurJoint
+#       - FR_TibiaJoint
+#       - RL_HipJoint
+#       - RL_FemurJoint
+#       - RL_TibiaJoint
+#       - RR_HipJoint
+#       - RR_FemurJoint
+#       - RR_TibiaJoint
+
+#     interface_name: position
+
+
+robot_controller:
+  ros__parameters:
+    joints:
+      - FL_HipJoint
+      - FL_FemurJoint
+      - FL_TibiaJoint
+      - FR_HipJoint
+      - FR_FemurJoint
+      - FR_TibiaJoint
+      - RL_HipJoint
+      - RL_FemurJoint
+      - RL_TibiaJoint
+      - RR_HipJoint
+      - RR_FemurJoint
+      - RR_TibiaJoint
+
+    command_joints:
+      - FL_HipJoint
+      - FL_FemurJoint
+      - FL_TibiaJoint
+      - FR_HipJoint
+      - FR_FemurJoint
+      - FR_TibiaJoint
+      - RL_HipJoint
+      - RL_FemurJoint
+      - RL_TibiaJoint
+      - RR_HipJoint
+      - RR_FemurJoint
+      - RR_TibiaJoint
+
+    command_interfaces:
+      - position
+
+    state_interfaces:
+      - position
+      - veloicty
+
+    state_publish_rate: 50.0 # Hz, Defaults to 50
+    action_monitor_rate: 20.0 # Hz, Defaults to 20
+
+    allow_partial_joints_goal: false # Defaults to false
+    open_loop_control: true
+    allow_integration_in_goal_trajectories: true
+
+    constraints:
+      goal_time: 0.0
+      stopped_velocity_tolerance: 0.01
+      stop_trajectory_duration: 0.0
+      FL_HipJoint: {trajectory: 0.01, goal: 0.01}
+      FL_FemurJoint: {trajectory: 0.01, goal: 0.01}
+      FL_TibiaJoint: {trajectory: 0.01, goal: 0.01}
+      FR_HipJoint: {trajectory: 0.01, goal: 0.01}
+      FR_FemurJoint: {trajectory: 0.01, goal: 0.01}
+      FR_TibiaJoint: {trajectory: 0.01, goal: 0.01}
+      RL_HipJoint: {trajectory: 0.01, goal: 0.01}
+      RL_FemurJoint: {trajectory: 0.01, goal: 0.01}
+      RL_TibiaJoint: {trajectory: 0.01, goal: 0.01}
+      RR_HipJoint: {trajectory: 0.01, goal: 0.01}
+      RR_FemurJoint: {trajectory: 0.01, goal: 0.01}
+      RR_TibiaJoint: {trajectory: 0.01, goal: 0.01}
+    gains:
+      FL_HipJoint: {p: 100.0, d: 75.0, i: 0.0, i_clamp: 0.0}
+      FL_FemurJoint: {p: 100.0, d: 75.0, i: 0.0, i_clamp: 0.0}
+      FL_TibiaJoint: {p: 100.0, d: 75.0, i: 0.0, i_clamp: 0.0}
+      FR_HipJoint: {p: 100.0, d: 75.0, i: 0.0, i_clamp: 0.0}
+      FR_FemurJoint: {p: 100.0, d: 75.0, i: 0.0, i_clamp: 0.0}
+      FR_TibiaJoint: {p: 100.0, d: 75.0, i: 0.0, i_clamp: 0.0}
+      RL_HipJoint: {p: 100.0, d: 75.0, i: 0.0, i_clamp: 0.0}
+      RL_FemurJoint: {p: 100.0, d: 75.0, i: 0.0, i_clamp: 0.0}
+      RL_TibiaJoint: {p: 100.0, d: 75.0, i: 0.0, i_clamp: 0.0}
+      RR_HipJoint: {p: 100.0, d: 75.0, i: 0.0, i_clamp: 0.0}
+      RR_FemurJoint: {p: 100.0, d: 75.0, i: 0.0, i_clamp: 0.0}
+      RR_TibiaJoint: {p: 100.0, d: 75.0, i: 0.0, i_clamp: 0.0}
